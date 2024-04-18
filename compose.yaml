@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.postgresql:/var/lib/postgresql/data
+      - ./create.sql:/mnt/create.sql
+    environment:
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_USER=root
+      - POSTGRES_DB=app
+    networks:
+      - design-pattener
+
+networks:
+  design-pattener:
+    driver: bridge
